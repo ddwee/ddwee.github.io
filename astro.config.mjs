@@ -31,7 +31,7 @@ export default defineConfig({
         plugins: [yaml()],
     },
     prefetch: true,
-    site 'https://ddwee.github.io',
+    site:,
     scopedStyleStrategy: 'class',
     trailingSlash: 'always',
     build: {
