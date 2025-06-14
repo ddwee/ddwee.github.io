@@ -1,5 +1,5 @@
 export const PandaConfig = {
-    title: '建設予定地',
+    title: 'Panda Blog',
     description: 'Panda Blog, a blog powered by Astro',
     start: '2016',
     site: 'https://astro-theme-panda.vercel.app/',
