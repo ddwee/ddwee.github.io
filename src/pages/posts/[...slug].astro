@@ -23,7 +23,7 @@ export async function getStaticPaths() {
         }
     })
 }
-const { Content, frontmatter } = Astro.props.post_ja
+const { Content, frontmatter } = Astro.props.post_en
 let LocaleContent = Content
 const {locale} = useLocale(Astro.url)
 if (Astro.props.post_en && locale === 'en') {
