@@ -1,6 +1,6 @@
 export const PandaConfig = {
-    title: '建設予定地',
-    description: 'ブログの建設予定地です',
+    title: 'blog',
+    description: 'myblog',
     start: '2025',
     site: 'https://ddwee.github.io',
     defaultLocale: 'ja',
