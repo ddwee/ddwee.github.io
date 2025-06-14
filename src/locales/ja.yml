@@ -1,0 +1,23 @@
+nav:
+    posts: posts
+    recent: recent
+footer:
+    home: home
+    rss: rss
+    timeline: timeline
+    collection: collection
+    drafts: drafts
+    contact: お問い合わせ
+    built-with: Built with
+    inspired-by: Inspired by
+post:
+    back: 記事一覧へ
+    post_at: 投稿日
+    last_modified_at: 更新日
+message:
+    404-content: Page not found
+    back-later: Work not finished yet, please come back later
+    loading: Loading...
+pagination:
+    previous: 前へ
+    next: 次へ
