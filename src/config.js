@@ -10,7 +10,7 @@ export const PandaConfig = {
     ],
     footer: [
         { title: 'rss', url: '/rss.xml/' },
-        { title: 'contact', url: 'https://github.com/ddwee/ddwee.github.io/issues/new' },
+        { title: 'お問い合わせ', url: 'https://github.com/ddwee/ddwee.github.io/issues/new' },
         { title: 'github', url: 'https://github.com/ddwee/ddwee.github.io' }
     ]
 }
