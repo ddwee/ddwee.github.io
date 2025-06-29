@@ -7,13 +7,13 @@ import { PandaConfig } from '../config.js'
 const { defaultLocale } = PandaConfig
 
 // 対応言語の定義
-const supportedLocales = ['zh', 'en', 'ja']
+const supportedLocales = ['ja', 'en', 'zh']
 
 const useLocalePath = (lang: string) => {
     lang ??= ''
     
     // デフォルト言語（中国語）の場合はパスプレフィックスなし
-    if (lang === 'zh') {
+    if (lang === 'ja') {
         lang = ''
     }
     
@@ -21,8 +21,8 @@ const useLocalePath = (lang: string) => {
     let start = ''
     if (lang === 'en') {
         start = '/en'
-    } else if (lang === 'ja') {
-        start = '/ja'
+    } else if (lang === 'zh') {
+        start = '/zh'
     }
     
     return (path: string) => {
@@ -34,24 +34,24 @@ const useLocalePath = (lang: string) => {
 
 const useTranslation = (lang: string) => {
     if (!lang || !supportedLocales.includes(lang)) {
-        lang = 'zh' // デフォルト言語
+        lang = 'ja' // デフォルト言語
     }
     
     return (key: string) => {
         // 翻訳データの優先順位を設定
         let data
         switch (lang) {
+            case 'ja':
+                data = [ja, en, zh] // 中国語 > 英語 > 日本語
+                break
+            case 'en':
+                data = [en, ja, zh] // 英語 > 日本語 > 中国語
+                break
             case 'zh':
                 data = [zh, en, ja] // 中国語 > 英語 > 日本語
                 break
-            case 'en':
-                data = [en, zh, ja] // 英語 > 中国語 > 日本語
-                break
-            case 'ja':
-                data = [ja, zh, en] // 日本語 > 中国語 > 英語
-                break
             default:
-                data = [zh, en, ja]
+                data = [ja, en, zh]
         }
         
         // 翻訳キーを順番に検索
@@ -74,10 +74,10 @@ const detectLocaleFromUrl = (url: URL) => {
     
     if (pathname.startsWith('/en/') || pathname === '/en') {
         return 'en'
-    } else if (pathname.startsWith('/ja/') || pathname === '/ja') {
-        return 'ja'
+    } else if (pathname.startsWith('/zh/') || pathname === '/zh') {
+        return 'zh'
     } else {
-        return 'zh' // デフォルト
+        return 'ja' // デフォルト
     }
 }
 
