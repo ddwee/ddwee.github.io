@@ -18,7 +18,7 @@ export async function getStaticPaths() {
             props: {
                 post_zh: post,
                 post_en: enPost,
-                post_ja: jaPost,
+                
             }
         }
     })
@@ -29,9 +29,7 @@ const {locale} = useLocale(Astro.url)
 if (Astro.props.post_en && locale === 'en') {
     LocaleContent = Astro.props.post_en.Content
 }
-else if (Astro.props.post_ja && locale === 'ja') {
-    LocaleContent = Astro.props.post_ja.Content
-}
+
 ---
 
 <BlogPostLayout FrontMatter={frontmatter}>
