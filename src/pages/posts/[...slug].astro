@@ -28,13 +28,9 @@ let LocaleContent = Content
 const {locale} = useLocale(Astro.url)
 if (Astro.props.post_en && locale === 'en') {
     LocaleContent = Astro.props.post_en.Content
-}
-
-const { Content_No2, frontmatter } = Astro.props.post_ja
-let LocaleContent = Content_No2
-const {locale} = useLocale(Astro.url)
-if (Astro.props.post_en && locale === 'en') {
-    LocaleContent = Astro.props.post_en.Content_No2
+    else{
+        LocaleContent = Astro.props.post_ja.Content
+    }
 }
 ---
 
