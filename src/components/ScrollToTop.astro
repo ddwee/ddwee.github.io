@@ -1,0 +1,86 @@
+---
+// ScrollToTop.astro
+---
+
+<button id="scroll-to-top" class="scroll-to-top-btn" aria-label="ページの先頭に戻る">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 4L6 10H10V20H14V10H18L12 4Z" fill="currentColor"/>
+  </svg>
+</button>
+
+<style>
+.scroll-to-top-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  background: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+}
+
+.scroll-to-top-btn:hover {
+  background: #555;
+  transform: translateY(0) scale(1.1);
+}
+
+.scroll-to-top-btn.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .scroll-to-top-btn {
+    background: #666;
+  }
+  
+  .scroll-to-top-btn:hover {
+    background: #888;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const scrollBtn = document.getElementById('scroll-to-top');
+  const showButtonAt = window.innerHeight * 0.5; // ページの50%スクロールしたら表示
+  
+  function toggleScrollButton() {
+    if (window.pageYOffset > showButtonAt) {
+      scrollBtn?.classList.add('show');
+    } else {
+      scrollBtn?.classList.remove('show');
+    }
+  }
+  
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }
+  
+  // スクロールイベントリスナー
+  window.addEventListener('scroll', toggleScrollButton);
+  
+  // ボタンクリックイベント
+  scrollBtn?.addEventListener('click', scrollToTop);
+  
+  // 初期チェック
+  toggleScrollButton();
+});
+</script>
