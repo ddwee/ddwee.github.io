@@ -4,6 +4,8 @@ import {useLocale} from '@utils/locale'
 import {formatDateYMD} from "@utils/format";
 import {PostFrontMatter} from "../type";
 import ScrollToTop from '../components/ScrollToTop.astro';
+import PostNavigation from '../components/PostNavigation.astro';
+import { getPostNavigation } from '../utils/postNavigation';
 
 interface Props {
     FrontMatter: PostFrontMatter;
@@ -11,6 +13,8 @@ interface Props {
 const {FrontMatter} = Astro.props
 const {path, t, locale} = useLocale(Astro.url)
 const title = locale === 'en' && FrontMatter['title-en'] ? FrontMatter['title-en'] : FrontMatter['title']
+// 記事ナビゲーション情報を取得
+const { prev, next } = await getPostNavigation(FrontMatter.title);
 ---
 
 <Layout title={title} navbar={false}>
@@ -103,5 +107,7 @@ const title = locale === 'en' && FrontMatter['title-en'] ? FrontMatter['title-en
                     </div>
         )
     }
+    <!-- 記事ナビゲーションを追加 -->
+    <PostNavigation prev={prev} next={next} />
     <ScrollToTop />
 </Layout>
