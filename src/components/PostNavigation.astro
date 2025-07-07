@@ -1,0 +1,137 @@
+---
+// src/components/PostNavigation.astro
+import type { CollectionEntry } from 'astro:content';
+import {useLocale} from '@utils/locale'
+
+interface Props {
+  prev: CollectionEntry<'posts'> | null;
+  next: CollectionEntry<'posts'> | null;
+}
+
+const {path, t, locale} = useLocale(Astro.url)
+const { prev, next } = Astro.props;
+---
+
+<div class="post-navigation">
+  <div class="nav-container">
+    <!-- 前の記事 -->
+    <div class="nav-item prev">
+      {prev ? (
+        <a href={`/posts/${prev.slug}/`} class="nav-link">
+          <div class="nav-direction">
+            <span class="nav-arrow">←</span>
+            <span class="nav-label">{t('pagination.previous')}</span>
+          </div>
+          <div class="nav-title">{prev.data.title}</div>
+        </a>
+      ) : (
+        <div class="nav-placeholder"></div>
+      )}
+    </div>
+
+    <!-- 次の記事 -->
+    <div class="nav-item next">
+      {next ? (
+        <a href={`/posts/${next.slug}/`} class="nav-link">
+          <div class="nav-direction">
+            <span class="nav-label">{t('pagination.next')}</span>
+            <span class="nav-arrow">→</span>
+          </div>
+          <div class="nav-title">{next.data.title}</div>
+        </a>
+      ) : (
+        <div class="nav-placeholder"></div>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+.post-navigation {
+  margin: 3rem 0;
+  padding: 2rem 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav-item {
+  flex: 1;
+  max-width: 45%;
+}
+
+.nav-item.next {
+  text-align: right;
+}
+
+.nav-link {
+  display: block;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-primary-main);
+  transform: translateY(-2px);
+}
+
+.nav-direction {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.nav-item.next .nav-direction {
+  justify-content: flex-end;
+}
+
+.nav-arrow {
+  font-size: 1.25rem;
+  color: var(--color-primary-main);
+}
+
+.nav-title {
+  font-weight: 600;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.nav-placeholder {
+  height: 1px;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .nav-item {
+    max-width: 100%;
+  }
+  
+  .nav-item.next {
+    text-align: left;
+  }
+  
+  .nav-item.next .nav-direction {
+    justify-content: flex-start;
+  }
+}
+</style>
