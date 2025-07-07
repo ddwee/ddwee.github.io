@@ -19,5 +19,5 @@ message:
     back-later: Work not finished yet, please come back later
     loading: Loading...
 pagination:
-    previous: 前の記事
-    next: 次の記事
+    previous: 過去の記事
+    next: 新しい記事
