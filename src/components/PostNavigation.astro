@@ -25,7 +25,7 @@ const { prev, next } = Astro.props;
           <div class="nav-title">{prev.data.title}</div>
         </a>
       ) : (
-        <div class="nav-placeholder"></div>
+        <a rel="prefetch" class="panda-link mt-6" href={path('/')}>{t('post.back')}</a>
       )}
     </div>
 
